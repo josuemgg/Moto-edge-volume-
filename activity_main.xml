@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0F1117"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
+
+        <!-- Header -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="⬣"
+            android:textSize="48sp"
+            android:textColor="#4C8EFF"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Edge Volume"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:letterSpacing="0.05"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Control de volumen por el borde curvo"
+            android:textSize="14sp"
+            android:textColor="#8A8FA8"/>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="8dp"
+            android:background="#1E2235"/>
+
+        <!-- Permission card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            android:background="@drawable/card_bg"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Permiso requerido"
+                android:textSize="13sp"
+                android:textColor="#8A8FA8"
+                android:textAllCaps="true"
+                android:letterSpacing="0.1"/>
+
+            <TextView
+                android:id="@+id/tvPermissionStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Verificando..."
+                android:textSize="15sp"
+                android:textColor="#FFFFFF"/>
+
+            <Button
+                android:id="@+id/btnPermission"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="14dp"
+                android:text="Conceder permiso de superposición"
+                android:textSize="14sp"
+                android:backgroundTint="#4C8EFF"
+                android:textColor="#FFFFFF"
+                style="@style/Widget.Material3.Button"/>
+
+        </LinearLayout>
+
+        <!-- Side selector card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical"
+            android:background="@drawable/card_bg"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lado del borde"
+                android:textSize="13sp"
+                android:textColor="#8A8FA8"
+                android:textAllCaps="true"
+                android:letterSpacing="0.1"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroupSide"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioRight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="Derecho →"
+                    android:textColor="#FFFFFF"
+                    android:buttonTint="#4C8EFF"/>
+
+                <RadioButton
+                    android:id="@+id/radioLeft"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="← Izquierdo"
+                    android:textColor="#FFFFFF"
+                    android:buttonTint="#4C8EFF"/>
+
+            </RadioGroup>
+        </LinearLayout>
+
+        <!-- Activate / deactivate -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/card_bg"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Borde activo"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"/>
+
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="Desactivado"
+                    android:textSize="13sp"
+                    android:textColor="#8A8FA8"/>
+            </LinearLayout>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchService"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"/>
+
+        </LinearLayout>
+
+        <!-- How to use card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="32dp"
+            android:orientation="vertical"
+            android:background="@drawable/card_bg"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cómo usar"
+                android:textSize="13sp"
+                android:textColor="#8A8FA8"
+                android:textAllCaps="true"
+                android:letterSpacing="0.1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="↑  Deslizar hacia arriba — Subir volumen"
+                android:textSize="14sp"
+                android:textColor="#CCDDFF"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="↓  Deslizar hacia abajo — Bajar volumen"
+                android:textSize="14sp"
+                android:textColor="#CCDDFF"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="↔  Arrastrar horizontalmente — Mover el borde"
+                android:textSize="14sp"
+                android:textColor="#CCDDFF"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="La barra azul muestra el nivel de volumen actual."
+                android:textSize="13sp"
+                android:textColor="#8A8FA8"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

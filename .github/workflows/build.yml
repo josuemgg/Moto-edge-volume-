@@ -1,0 +1,70 @@
+name: Build APK
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Reorganizar archivos al lugar correcto
+        run: |
+          mkdir -p app/src/main/java/com/edgevolume
+          mkdir -p app/src/main/res/layout
+          mkdir -p app/src/main/res/drawable
+          mkdir -p app/src/main/res/values
+          mkdir -p gradle/wrapper
+
+          cp AndroidManifest.xml      app/src/main/AndroidManifest.xml
+          cp MainActivity.kt          app/src/main/java/com/edgevolume/MainActivity.kt
+          cp EdgeVolumeService.kt     app/src/main/java/com/edgevolume/EdgeVolumeService.kt
+          cp activity_main.xml        app/src/main/res/layout/activity_main.xml
+          cp card_bg.xml              app/src/main/res/drawable/card_bg.xml
+          cp colors.xml               app/src/main/res/values/colors.xml
+          cp strings.xml              app/src/main/res/values/strings.xml
+          cp themes.xml               app/src/main/res/values/themes.xml
+          cp gradle-wrapper.properties gradle/wrapper/gradle-wrapper.properties
+          cp proguard-rules.pro       app/proguard-rules.pro
+          cp build.gradle.kts         app/build.gradle.kts
+
+      - name: Crear build.gradle.kts raíz
+        run: |
+          cat > build.gradle.kts << 'EOF'
+          plugins {
+              id("com.android.application") version "8.2.2" apply false
+              id("org.jetbrains.kotlin.android") version "1.9.22" apply false
+          }
+          EOF
+
+      - name: Descargar gradle-wrapper.jar
+        run: |
+          wget -q \
+            "https://raw.githubusercontent.com/gradle/gradle/v8.4.0/gradle/wrapper/gradle-wrapper.jar" \
+            -O gradle/wrapper/gradle-wrapper.jar
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Permiso de ejecución a gradlew
+        run: chmod +x gradlew
+
+      - name: Compilar APK
+        run: ./gradlew assembleRelease --stacktrace
+
+      - name: Subir APK como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: EdgeVolume-APK
+          path: app/build/outputs/apk/release/app-release.apk
+          retention-days: 30
+          
